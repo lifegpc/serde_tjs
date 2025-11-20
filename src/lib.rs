@@ -66,6 +66,34 @@ mod tests {
     }
 
     #[test]
+    fn dump_float() {
+        let value = 1f64;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "1.0");
+        let value = 300f64;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "300.0");
+        let value = 3e10f64;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "30000000000.0");
+        let value = 3e20f64;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "300000000000000000000.0");
+        let value = f64::INFINITY;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "Infinity");
+        let value = f64::NEG_INFINITY;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "-Infinity");
+        let value = f64::NAN;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "NaN");
+        let value = -10f64;
+        let s = crate::to_string(&value).expect("serialize");
+        assert_eq!(s, "-10.0");
+    }
+
+    #[test]
     fn parse_save_struct_sample() {
         let input = r#"(const) [
             1,

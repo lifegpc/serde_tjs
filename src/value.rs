@@ -70,6 +70,8 @@ impl Value {
                     } else {
                         writer.write_str("Infinity")
                     }
+                } else if num.fract() == 0.0 || num.fract() == 1.0 {
+                    write!(writer, "{}.0", num)
                 } else {
                     write!(writer, "{}", num)
                 }
